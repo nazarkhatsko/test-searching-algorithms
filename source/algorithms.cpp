@@ -8,12 +8,27 @@ int linear_search(const std::vector<data_t> &v, data_t x) {
 			return i;
 		};
 	};
+
 	return -1;
 
 };
 
 
 int binary_search(const std::vector<data_t> &v, data_t x) {
+
+	int l = 0;
+	int r = v.size() - 1;
+
+	while (l <= r) {
+		int n = l + (r - l) / 2;
+		if (v.at(n) == x) {
+			return n;
+		} else if (v.at(n) < x) {
+			l = n + 1;
+		} else {
+			r = n - 1;
+		};
+	};
 
 	return -1;
 
@@ -22,26 +37,77 @@ int binary_search(const std::vector<data_t> &v, data_t x) {
 
 int jump_search(const std::vector<data_t> &v, data_t x) {
 
+	int prev = 0;
+	int step = std::sqrt(v.size());
+
+	while (v.at(std::fmin(step, v.size()) - 1) < x) {
+		prev = step;
+		step += std::sqrt(v.size());
+		if (prev >= v.size()) {
+			return -1;
+		};
+	};
+
+	while (v.at(prev) < x) {
+		prev++;
+
+		if (prev == std::fmin(step, v.size())) {
+			return -1;
+		};
+	};
+
+	if (v.at(prev) == x) {
+		return prev;
+	};
+
 	return -1;
 
 };
 
 
-int interpolation_search(const std::vector<data_t> &arr, data_t val) {
+int interpolation_search(const std::vector<data_t> &v, data_t x) {
 
 	return -1;
 
 };
 
 
-int exponential_search(const std::vector<data_t> &arr, data_t val) {
+int exponential_search(const std::vector<data_t> &v, data_t x) {
 
 	return -1;
 
 };
 
 
-int fibonacci_search(const std::vector<data_t> &arr, data_t val) {
+int fibonacci_search(const std::vector<data_t> &v, data_t x) {
+
+	int fib_num_1 = 1;
+	int fib_num_2 = 0;
+	int fib_sum = fib_num_2 + fib_num_1;
+
+	while (fib_sum < v.size()) {
+		fib_num_2 = fib_num_1;
+		fib_num_1 = fib_sum;
+		fib_sum = fib_num_2 + fib_num_1;
+	};
+
+	int offset = -1;
+	while (fib_sum > 1) {
+		int i = std::fmin(offset + fib_num_2, v.size() - 1);
+
+		if (v.at(i) < x) {
+			fib_sum = fib_num_1;
+			fib_num_1 = fib_num_2;
+			fib_num_2 = fib_sum - fib_num_1;
+			offset = i;
+		} else if (v.at(i) > x) {
+			fib_sum = fib_num_2;
+			fib_num_1 = fib_num_1 - fib_num_2;
+			fib_num_2 = fib_sum - fib_num_1;
+		} else {
+			return i;
+		};
+	};
 
 	return -1;
 
