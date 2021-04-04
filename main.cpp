@@ -13,9 +13,9 @@
 std::vector<data_t> generate_array(std::size_t size) {
 
 	std::vector<data_t> v(size);
-	std::size_t n = 1;
+	data_t el = 1;
 	std::generate(v.begin(), v.end(), [&]() mutable {
-		return n++; 
+		return el++; 
 	});
 	return v;
 
@@ -27,7 +27,7 @@ int main() {
 	std::cout << std::fixed;
 
 	std::cout << "TSA (Test Searching Algorithms)" << '\n';
-	std::cout << "Version 1.0" << '\n';
+	std::cout << "Version 1.1" << '\n';
 	std::cout << '\n';
 
 	auto size = std::stoi(input("enter size: "));

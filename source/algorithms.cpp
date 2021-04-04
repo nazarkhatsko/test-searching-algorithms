@@ -67,12 +67,50 @@ int jump_search(const std::vector<data_t> &v, data_t x) {
 
 int interpolation_search(const std::vector<data_t> &v, data_t x) {
 
+	int l = 0;
+	int r = v.size() - 1;
+
+	if (l <= r && x >= v.at(l) && x <= v.at(r)) {
+		int i = l + ((static_cast<double>(r - l) / (v.at(r) - v.at(l))) * (x - v.at(l)));
+
+		if (v.at(i) == x) {
+			return i;
+		} else if (v.at(i) < x) {
+			l = i + 1;
+		} else {
+			r = i - 1;
+		};
+	};
+
 	return -1;
 
 };
 
 
 int exponential_search(const std::vector<data_t> &v, data_t x) {
+
+	if (v.front() == x) {
+		return 0;
+	};
+
+	int i = 1;
+	while (i < v.size() && v.at(i) <= x) {
+		i = i * 2;
+	};
+
+	int l = i / 2;
+	int r = std::fmin(i, v.size() - 1);
+
+	while (l <= r) {
+		int n = l + (r - l) / 2;
+		if (v.at(n) == x) {
+			return n;
+		} else if (v.at(n) < x) {
+			l = n + 1;
+		} else {
+			r = n - 1;
+		};
+	};
 
 	return -1;
 

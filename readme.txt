@@ -1,5 +1,5 @@
 TSA (Test Searching Algorithms)
-Version 1.0
+Version 1.1
 
 test of the most popular searching algorithms
 the collection includes the following algorithms:
