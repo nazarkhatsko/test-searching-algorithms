@@ -7,10 +7,10 @@
 #include <chrono>
 #include <functional>
 
+using result_t = std::vector<std::pair<std::string, double>>;
 
-using pair_t = std::pair<std::string, double>;
-
-
-std::string input(const std::string &);
-void print_result(const std::vector<pair_t> &);
-double test_algorithm(std::function<int()>);
+std::string      input          (const std::string &s);
+void             sort_result    (result_t &r);
+void             print_result   (const result_t &r);
+double           execution_time (std::function<int()> f);
+std::vector<int> generate_array (std::size_t size);
